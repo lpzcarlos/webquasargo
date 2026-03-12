@@ -38,9 +38,9 @@ export function Hero() {
     >
       <div className="absolute inset-0 z-0 bg-[#030A17]">
         <img 
-          src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?q=80&w=2070&auto=format&fit=crop" 
-          alt="Cinematic background" 
-          className="w-full h-full object-cover opacity-60 mix-blend-luminosity"
+          src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" 
+          alt="Abstract automation and network background" 
+          className="w-full h-full object-cover opacity-50 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#030A17] via-[#00CFBF]/10 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#030A17] via-[#030A17]/80 to-transparent opacity-90" />

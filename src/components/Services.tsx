@@ -52,9 +52,9 @@ export function Services() {
   return (
     <section id="soluciones" ref={containerRef} className="w-full relative py-32 px-6 lg:px-20 section-separator">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center md:text-left">
+        <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-5xl font-sans font-semibold mb-4 text-white">Soluciones Optimizadas</h2>
-          <p className="text-lg text-[#E4ECFF]/60 font-sans max-w-2xl mx-auto md:mx-0">
+          <p className="text-lg text-[#E4ECFF]/60 font-sans max-w-2xl mx-auto">
             Sistemas construidos para destruir la fricción operativa y escalar sin aumentar personal.
           </p>
         </div>

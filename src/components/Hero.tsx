@@ -49,7 +49,7 @@ export function Hero() {
       <div className="relative z-10 w-full max-w-5xl mx-auto text-center flex flex-col items-center pt-20">
         <h1 
           ref={text1Ref}
-          className="text-white font-sans font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] tracking-tight leading-tight mb-6 max-w-4xl"
+          className="text-white font-sans font-bold text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] tracking-tight leading-tight mb-6 max-w-4xl"
           style={{ opacity: 0 }}
         >
           El trabajo que te roba tiempo, resolviéndose solo.

@@ -18,40 +18,53 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
-      <div
+    <nav 
+      className={cn(
+        "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ease-in-out",
+        scrolled ? "bg-[#030A17]/85 backdrop-blur-md py-2" : "bg-transparent py-4 md:py-6"
+      )}
+    >
+      {/* Línea divisoria azul inferior (sólo visible con scroll) */}
+      <div 
         className={cn(
-          "flex items-center justify-between px-6 py-3 rounded-full transition-all duration-500 ease-in-out w-full max-w-5xl border",
-          scrolled
-            ? "bg-white/70 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.1)] border-white/20 text-[#00CFBF]"
-            : "bg-transparent text-white border-transparent"
+          "absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#22D3EE]/50 to-transparent transition-opacity duration-500",
+          scrolled ? "opacity-100" : "opacity-0"
         )}
-      >
+      />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex items-center justify-between">
         <div className="flex items-center gap-3">
+          {/* Al ser ahora un fondo oscuro en ambos estados, usamos siempre los logos claros */}
           <img
-            src={scrolled ? "Logo_color_oscuro.svg" : "Logo_con_letras_color_claro.svg"}
+            src="Logo_con_letras_color_claro.svg"
             alt="Quasar Go"
-            className="h-20 w-auto transition-opacity duration-300 hidden md:block"
+            className={cn(
+              "w-auto transition-all duration-300 hidden md:block",
+              scrolled ? "h-16" : "h-20"
+            )}
           />
           <img
-            src={scrolled ? "Logo_color_oscuro.svg" : "Logo_color_claro.svg"}
+            src="Logo_color_claro.svg"
             alt="Quasar Go"
-            className="h-16 w-auto transition-opacity duration-300 block md:hidden"
+            className={cn(
+              "w-auto transition-all duration-300 block md:hidden",
+              scrolled ? "h-12" : "h-16"
+            )}
           />
         </div>
 
-        <div className="hidden md:flex items-center gap-8 font-sans font-medium text-sm">
-          <a href="#soluciones" className="hover:opacity-70 transition-opacity">Soluciones</a>
-          <a href="#proceso" className="hover:opacity-70 transition-opacity">Proceso</a>
+        <div className="hidden md:flex items-center gap-8 font-sans font-medium text-sm text-[#E4ECFF]">
+          <a href="#soluciones" className="hover:text-[#22D3EE] transition-colors">Soluciones</a>
+          <a href="#proceso" className="hover:text-[#22D3EE] transition-colors">Proceso</a>
         </div>
 
         <a
           href="#reserva"
           className={cn(
-            "rounded-full px-5 py-2 text-sm font-sans font-semibold transition-all duration-300 hover:scale-105 active:scale-95",
+            "rounded-full px-5 py-2.5 text-sm font-sans font-semibold transition-all duration-300 hover:scale-105 active:scale-95",
             scrolled
-              ? "bg-[#00CFBF] text-white hover:shadow-lg hover:shadow-[#00CFBF]/20"
-              : "bg-white text-background hover:bg-white/90"
+              ? "bg-[#00CFBF] text-[#030A17] hover:shadow-lg hover:shadow-[#00CFBF]/20"
+              : "bg-white text-[#030A17] hover:bg-white/90"
           )}
         >
           Agendar consultoría

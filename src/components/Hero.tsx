@@ -38,7 +38,7 @@ export function Hero() {
     >
       <div className="absolute inset-0 z-0 bg-[#030A17]">
         <img 
-          src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop" 
           alt="Abstract automation and network background" 
           className="w-full h-full object-cover opacity-50 mix-blend-luminosity"
         />

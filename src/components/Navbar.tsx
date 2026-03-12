@@ -32,7 +32,7 @@ export function Navbar() {
         )}
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 w-full flex items-center justify-between">
+      <div className="max-w-7xl mx-auto pl-1 pr-3 md:px-6 lg:px-12 w-full flex items-center justify-between">
         <div className="flex items-center gap-3">
           {/* Al ser ahora un fondo oscuro en ambos estados, usamos siempre los logos claros */}
           <img

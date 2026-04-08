@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -33,7 +34,7 @@ export function Navbar() {
       />
 
       <div className="max-w-7xl mx-auto pl-1 pr-3 md:px-6 lg:px-12 w-full flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           {/* Al ser ahora un fondo oscuro en ambos estados, usamos siempre los logos claros */}
           <img
             src="Logo_con_letras_color_claro.svg"
@@ -51,15 +52,16 @@ export function Navbar() {
               scrolled ? "h-12" : "h-16"
             )}
           />
-        </div>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8 font-sans font-medium text-sm text-[#E4ECFF]">
-          <a href="#soluciones" className="hover:text-[#22D3EE] transition-colors">Soluciones</a>
-          <a href="#proceso" className="hover:text-[#22D3EE] transition-colors">Proceso</a>
+          <a href="/#soluciones" className="hover:text-[#22D3EE] transition-colors">Soluciones</a>
+          <a href="/#proceso" className="hover:text-[#22D3EE] transition-colors">Proceso</a>
+          <Link to="/contacto" className="hover:text-[#22D3EE] transition-colors">Contacto</Link>
         </div>
 
         <a
-          href="#reserva"
+          href="/#reserva"
           className={cn(
             "rounded-full px-5 py-2.5 text-sm font-sans font-semibold transition-all duration-300 hover:scale-105 active:scale-95",
             scrolled

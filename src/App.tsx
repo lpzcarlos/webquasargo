@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Home } from './pages/Home';
 import { Terms } from './pages/Terms';
 import { Privacy } from './pages/Privacy';
+import { Contact } from './pages/Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/terminos" element={<Terms />} />
         <Route path="/privacidad" element={<Privacy />} />
+        <Route path="/contacto" element={<Contact />} />
       </Routes>
     </Router>
   );

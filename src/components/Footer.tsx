@@ -17,6 +17,10 @@ export function Footer() {
             <Link to="/terminos" className="text-[#E4ECFF]/60 hover:text-primary transition-colors">Términos y Condiciones</Link>
             <Link to="/privacidad" className="text-[#E4ECFF]/60 hover:text-primary transition-colors">Política de Privacidad</Link>
           </div>
+          <div className="flex flex-col gap-3">
+            <h4 className="text-white font-semibold mb-2">Empresa</h4>
+            <Link to="/contacto" className="text-[#E4ECFF]/60 hover:text-primary transition-colors">Contacto</Link>
+          </div>
         </div>
       </div>
 

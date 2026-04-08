@@ -107,11 +107,29 @@ export function Form() {
 
     setIsSubmitting(true);
 
-    // Simulate sending
-    await new Promise((resolve) => setTimeout(resolve, 1800));
+    try {
+      const datos = {
+        nombre: formData.nombre,
+        correo: formData.correo,
+        numero: formData.telefono,
+        mensaje: formData.consulta,
+      };
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      await fetch(
+        'https://yestern-dyostyle-shenika.ngrok-free.dev/webhook-test/422dbc3c-9ab9-4242-90c8-dcb4e8fd743b',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos),
+        }
+      );
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

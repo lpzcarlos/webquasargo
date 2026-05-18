@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { Send, User, Mail, Phone, MessageSquare, ShieldCheck, CheckCircle2, Loader2 } from 'lucide-react';
 
@@ -175,8 +175,7 @@ export function Form() {
                 Hemos recibido tu consulta. Nuestro equipo se pondrá en contacto
                 contigo en las próximas 24 horas.
               </p>
-              <Link
-                to="/"
+              <Link href="/"
                 className="inline-flex items-center justify-center bg-[#00CFBF] text-[#030A17] px-8 py-3.5 rounded-full font-semibold transition-transform hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(0,207,191,0.4)] active:scale-95"
               >
                 Volver al inicio
@@ -347,8 +346,7 @@ export function Form() {
                   </div>
                   <span className="text-sm text-[#E4ECFF]/60 leading-relaxed">
                     Acepto la{' '}
-                    <Link
-                      to="/privacidad"
+                    <Link href="/privacidad"
                       className="text-[#22D3EE] underline underline-offset-2 hover:opacity-80 transition-opacity"
                       onClick={(e) => e.stopPropagation()}
                     >

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Form } from '../components/Form';
-import { CheckCircle2, Calendar, BookOpen, MessageSquare, Gamepad2, ChevronDown, Check } from 'lucide-react';
+import { CheckCircle2, Calendar, BookOpen, MessageSquare, Gamepad2, ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

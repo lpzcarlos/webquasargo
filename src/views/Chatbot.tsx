@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Form } from '../components/Form';
-import { CheckCircle2, Calendar, BookOpen, MessageSquare, Gamepad2, ChevronDown } from 'lucide-react';
+import { CheckCircle2, Calendar, BookOpen, MessageSquare, Gamepad2, ChevronDown, ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -120,10 +120,52 @@ const FAQ_DATA = [
   }
 ];
 
+const PANEL_IMAGES = [
+  {
+    src: '/1conversaciones.webp',
+    title: 'Historial de conversaciones',
+    desc: 'Visualiza cada chat en tiempo real, detecta patrones e interviene cuando sea necesario.'
+  },
+  {
+    src: '/2calendario.webp',
+    title: 'Calendario de citas',
+    desc: 'Gestiona todas las reservas captadas de manera automática por el bot.'
+  },
+  {
+    src: '/3conocimiento.webp',
+    title: 'Base de conocimiento',
+    desc: 'Entrena al asistente subiendo documentos, PDF o textos personalizados.'
+  },
+  {
+    src: '/4metricas.webp',
+    title: 'Métricas y estadísticas',
+    desc: 'Evalúa el rendimiento de tu chatbot y la satisfacción del cliente.'
+  }
+];
+
 export function Chatbot() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isLightboxOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsLightboxOpen(false);
+      } else if (e.key === 'ArrowRight') {
+        setCurrentSlide((prev) => (prev === PANEL_IMAGES.length - 1 ? 0 : prev + 1));
+      } else if (e.key === 'ArrowLeft') {
+        setCurrentSlide((prev) => (prev === 0 ? PANEL_IMAGES.length - 1 : prev - 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isLightboxOpen]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -300,6 +342,76 @@ export function Chatbot() {
                 </div>
               ))}
             </div>
+
+            {/* CARRUSEL DE IMÁGENES DEL PANEL */}
+            <div className="mt-16 max-w-5xl mx-auto flex flex-col items-center">
+              {/* Slider Viewport */}
+              <div className="w-full relative group">
+                {/* Left Arrow */}
+                <button
+                  onClick={() => setCurrentSlide((prev) => (prev === 0 ? PANEL_IMAGES.length - 1 : prev - 1))}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-[#0D1929]/80 border border-[#162840] hover:bg-[#162840] hover:text-[#22D3EE] text-white p-3 rounded-full backdrop-blur-sm transition-all shadow-lg hover:scale-105 active:scale-95"
+                  aria-label="Anterior captura"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+
+                {/* Right Arrow */}
+                <button
+                  onClick={() => setCurrentSlide((prev) => (prev === PANEL_IMAGES.length - 1 ? 0 : prev + 1))}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-[#0D1929]/80 border border-[#162840] hover:bg-[#162840] hover:text-[#22D3EE] text-white p-3 rounded-full backdrop-blur-sm transition-all shadow-lg hover:scale-105 active:scale-95"
+                  aria-label="Siguiente captura"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+
+                {/* Image Frame */}
+                <div 
+                  onClick={() => setIsLightboxOpen(true)}
+                  className="relative cursor-zoom-in overflow-hidden rounded-2xl border border-[#162840] bg-[#0A1220] shadow-[0_0_50px_rgba(34,211,238,0.08)] transition-all duration-500 hover:shadow-[0_0_60px_rgba(34,211,238,0.15)] group/image w-full"
+                >
+                  {/* Hover Overlay with Zoom Icon */}
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                    <div className="bg-black/60 border border-[#22D3EE]/30 backdrop-blur-md px-5 py-3 rounded-full text-white text-sm font-semibold flex items-center gap-2 transform translate-y-4 group-hover/image:translate-y-0 transition-all duration-300 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                      <ZoomIn className="w-4 h-4 text-[#22D3EE]" />
+                      <span>Ver pantalla completa</span>
+                    </div>
+                  </div>
+
+                  {/* Images wrapper for smooth slide/fade */}
+                  <div className="w-full relative flex items-center justify-center overflow-hidden rounded-2xl">
+                    {PANEL_IMAGES.map((img, index) => (
+                      <img
+                        key={img.src}
+                        src={img.src}
+                        alt={img.title}
+                        className={`w-full h-auto object-cover rounded-2xl transition-all duration-700 ease-in-out ${
+                          index === currentSlide 
+                            ? 'relative opacity-100 scale-100 z-0' 
+                            : 'absolute top-0 left-0 opacity-0 scale-105 pointer-events-none -z-10'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Dots Indicators */}
+              <div className="flex gap-2.5 mt-6 justify-center">
+                {PANEL_IMAGES.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      index === currentSlide 
+                        ? 'w-8 bg-[#22D3EE]' 
+                        : 'w-2.5 bg-[#162840] hover:bg-[#22D3EE]/50'
+                    }`}
+                    aria-label={`Ir a la imagen ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -370,6 +482,69 @@ export function Chatbot() {
         </div>
         
       </main>
+
+      {/* LIGHTBOX MODAL */}
+      {isLightboxOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md transition-all duration-300"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          {/* Close Button */}
+          <button
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-6 right-6 z-[60] bg-[#0D1929]/80 border border-[#162840] text-white hover:text-[#22D3EE] p-3 rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg"
+            aria-label="Cerrar vista"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Prev Button in Lightbox */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentSlide((prev) => (prev === 0 ? PANEL_IMAGES.length - 1 : prev - 1));
+            }}
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-[60] bg-[#0D1929]/80 border border-[#162840] text-white hover:text-[#22D3EE] p-3 rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg"
+            aria-label="Imagen anterior"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          {/* Next Button in Lightbox */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentSlide((prev) => (prev === PANEL_IMAGES.length - 1 ? 0 : prev + 1));
+            }}
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-[60] bg-[#0D1929]/80 border border-[#162840] text-white hover:text-[#22D3EE] p-3 rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg"
+            aria-label="Imagen siguiente"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Full Image Container */}
+          <div 
+            className="relative max-w-[90vw] max-h-[80vh] md:max-w-[80vw] md:max-h-[75vh] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={PANEL_IMAGES[currentSlide].src}
+              alt={PANEL_IMAGES[currentSlide].title}
+              className="max-w-full max-h-full object-contain rounded-lg border border-[#162840]/60 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+            />
+            {/* Title / Captions below image in lightbox */}
+            <div className="mt-4 text-center px-4">
+              <h4 className="text-xl font-bold text-white">
+                {PANEL_IMAGES[currentSlide].title}
+              </h4>
+              <p className="text-[#E4ECFF]/70 text-sm mt-1 max-w-lg mx-auto">
+                {PANEL_IMAGES[currentSlide].desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </>
   );

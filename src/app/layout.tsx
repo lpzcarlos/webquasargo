@@ -10,9 +10,6 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], v
 export const metadata: Metadata = {
   title: 'Quasar Go - Automatización y Servicios IA',
   description: 'Automatización y Servicios IA',
-  icons: {
-    icon: '/Logo_color_claro.svg',
-  },
 };
 
 export default function RootLayout({
